@@ -5,7 +5,7 @@ public class Printer {
     private boolean duplex;
 
     public Printer(int tonerLevel, boolean duplex) {
-        this.tonerLevel = tonerLevel;
+        this.tonerLevel = tonerLevel >= 0 && tonerLevel <= 100 ? tonerLevel : 0;
         this.duplex = duplex;
     }
 
@@ -27,10 +27,13 @@ public class Printer {
 
         if (duplex) {
             System.out.println("This is a duplex printer.");
-        pagesToPrint = (pages + 1) / 2;
+        pagesToPrint = (pages / 2) + (pages % 2);
         } else {
             pagesToPrint = pages;
         } return pagesPrinted += pagesToPrint;
     }
 
+    public int getPagesPrinted() {
+        return pagesPrinted;
+    }
 }
